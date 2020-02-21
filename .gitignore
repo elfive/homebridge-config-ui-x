@@ -61,3 +61,10 @@ yarn.lock
 # dotenv environment variables file
 .env
 .DS_Store
+
+# webstorm/intellij
+.idea
+
+# vscode
+.vscode/arduino.json
+.vscode/c_cpp_properties.json

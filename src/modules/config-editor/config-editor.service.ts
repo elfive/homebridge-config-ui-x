@@ -36,8 +36,12 @@ export class ConfigEditorService {
       config.bridge.name = 'Homebridge';
     }
 
-    if (!config.bridge.port) {
-      config.bridge.port = 51826;
+    if (typeof config.bridge.port === 'string') {
+      config.bridge.port = parseInt(config.bridge.port, 10);
+    }
+
+    if (!config.bridge.port || typeof config.bridge.port !== 'number' || config.bridge.port > 65533 || config.bridge.port < 1025) {
+      config.bridge.port = Math.floor(Math.random() * (52000 - 51000 + 1) + 51000);
     }
 
     if (!config.bridge.username) {
@@ -72,6 +76,11 @@ export class ConfigEditorService {
     fs.writeJsonSync(this.configService.configPath, config, { spaces: 4 });
 
     this.logger.log('Changes to config.json saved.');
+
+    // parse the config for ui settings
+    const configCopy = {};
+    Object.assign(configCopy, config);
+    this.configService.parseConfig(configCopy);
 
     return config;
   }

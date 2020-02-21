@@ -20,12 +20,12 @@
         "required": true
       },
       "auth": {
-        "title": "Auth Mode",
+        "title": "Homebridge Config UI X Authentication",
         "type": "string",
         "default": "form",
         "oneOf": [
           {
-            "title": "Form",
+            "title": "Require Authentication",
             "enum": [
               "form"
             ]
@@ -145,22 +145,12 @@
             "enum": [
               "dark-mode"
             ]
-          },
-          {
-            "title": "Dark Mode (Old Version)",
-            "enum": [
-              "dark-mode-v1"
-            ]
           }
         ],
         "required": true
       },
       "restart": {
         "title": "Restart Command",
-        "type": "string"
-      },
-      "temp": {
-        "title": "Path to OS Temp File",
         "type": "string"
       },
       "tempUnits": {
@@ -209,10 +199,6 @@
       },
       "standalone": {
         "title": "Tell Homebridge the plugin is operating in standalone mode",
-        "type": "boolean"
-      },
-      "websocketCompatibilityMode": {
-        "title": " Run the web socket connection in compatibility mode",
         "type": "boolean"
       },
       "sessionTimeout": {
@@ -348,7 +334,7 @@
           "flex-flow": "column",
           "items": [
             "port",
-            "auth"
+            "tempUnits"
           ]
         }
       ]
@@ -426,8 +412,8 @@
       "title": "Advanced",
       "items": [
         "sudo",
-        "websocketCompatibilityMode",
         "debug",
+        "auth",
         {
           "key": "restart",
           "description": "If no restart command is set the process will terminate with a non-zero exit code."
@@ -442,29 +428,9 @@
           "description": "Leave blank to use default wallpaper."
         },
         {
-          "key": "temp",
-          "placeholder": "eg. /sys/class/thermal/thermal_zone0/temp"
-        },
-        "tempUnits",
-        {
           "key": "homebridgePackagePath",
           "description": "Leave blank unless you have not installed Homebridge as a global module."
         }
-      ]
-    },
-    {
-      "type": "fieldset",
-      "expandable": true,
-      "title": "SSL Setup",
-      "items": [
-        {
-          "type": "help",
-          "helpvalue": "<em class='primary-text'>Leave these fields blank to disable SSL.</em><br><em class='text-danger'>After enabling SSL you will only be able to access the Config UI using https://</div>"
-        },
-        "ssl.key",
-        "ssl.cert",
-        "ssl.pfx",
-        "ssl.passphrase"
       ]
     }
   ]
